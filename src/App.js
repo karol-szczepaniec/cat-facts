@@ -1,43 +1,57 @@
-import React, {useState} from "react";
+import React, {useState, useReducer, useEffect} from "react";
 import './App.css';
 import CatList from "./components/cat-list";
 import Header from "./components/header"
 function App() {
 
-    const [state,setState] = useState(2);
+    const baseUrl = "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount="
 
-    let cats = [
-        {
-            id: "59cd7a97c828120020f7d3a1",
-            data: "2020-01-12",
-            text: "Wszystkie Internetowe generatory Lorem Ipsum mają tendencje do kopiowania już istniejących bloków, co czyni nasz pierwszym prawdziwym generatorem w Internecie. Używamy zawierającego ponad 200 łacińskich słów słownika, w kontekście wielu znanych sentencji, by wygenerować tekst wyglądający odpowiednio.",
-        },
-        {
-            id: "789y9",
-            data: "2022-02-33",
-            text: "jakiś opis jest",
-        },
-        {
-            id: "789y9",
-            data: "2022-02-33",
-            text: "jakiś opis jest",
-        },
-    ]
+    const [state,setState] = useState(4);
+
+    const [catsList, dispatch] = useReducer(catsReducer,[])
+
+    useEffect(()=>{
+        const url = baseUrl+state;
+        fetch(url).then(response=>{
+            if(response.ok){
+                return response.json();
+            }
+        }).then(data=>{
+            data.forEach(el=>{
+                let random = Math.floor(Math.random()*2)+1;
+                el.svgSrc = random ==1 ? "/static/media/cat1.79597c16.svg" : "/static/media/cat2.c8457b33.svg"
+            })
+            dispatch({type: "ADD", payload: data})
+        }).finally(()=>{
+
+    })
+
+    },[0])
+
+    function catsReducer(state, action){
+         return action.payload
+    }
 
     async function download(){
-        const url = "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount="+state;
+
+        const url = baseUrl+state;
 
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log(data);
+        data.forEach(el=>{
+            let random = Math.floor(Math.random()*2)+1;
+            el.svgSrc = random ==1 ? "/static/media/cat1.79597c16.svg" : "/static/media/cat2.c8457b33.svg"
+        })
+
+        dispatch({type: "ADD", payload: data})
 
     }
 
   return (
     <div className="App">
         <Header fetchCats={download} setThisState={setState}/>
-        <CatList catsToFetch={state} catsList={cats}/>
+        <CatList className="mainContent" catsToFetch={state} catsList={catsList}/>
     </div>
   );
 }

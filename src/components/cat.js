@@ -1,19 +1,28 @@
-import React from "react";
-import cat1 from "../svg/cat1.svg"
-import cat2 from "../svg/cat2.svg"
+import React, { Component, useState } from 'react';
+import Modal from './DialogModal';
+export default function CatItem(props){
 
-export default function catItem(props){
+    let date = new Date(props.item.createdAt).toLocaleDateString();
+
+    const [modalState, setModalState] =useState(false);
+    const [state, setState] =useState("");
+
+    function toggleModal(e, currentItem){
+        setState(currentItem);
+        setModalState(modalState ? false : true)
+    }
 
     return(
-        <div className="card" key={props.item.id}>
+        <div className="card" onClick={(e)=>toggleModal(e,props.item)}>
             <div className="picture">
-                <img src={cat1}/>
+                <img src={props.item.svgSrc}/>
             </div>
             <div className="content">
-            <div className="id">id: {props.item.id}</div>
-            <div className="date">{props.item.data}</div>
+            <div className="id">id: {props.item._id}</div>
+            <div className="date">{date}</div>
             <div className="text">{props.item.text}</div>
             </div>
+            <Modal show={modalState} onClose={toggleModal} item={state}></Modal>
         </div>
     )
 }
