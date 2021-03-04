@@ -12,6 +12,7 @@ export default function CatItem(props){
         setModalState(modalState ? false : true)
     }
 
+
     return(
         <div className="card" onClick={(e)=>toggleModal(e,props.item)}>
             <div className="picture">
