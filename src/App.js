@@ -58,19 +58,20 @@ function App() {
 
     async function download(){
 
-        const url = baseUrl+state;
+        if(state >0 && state <= 30) {
+            const url = baseUrl + state;
 
-        const response = await fetch(url);
-        const data = await response.json();
+            const response = await fetch(url);
+            const data = await response.json();
 
-        {
-            data.forEach(el => {
-                let random = Math.floor(Math.random() * 2) + 1;
-                el.svgSrc = random == 1 ? cat1 : cat2
-            })
+            {
+                data.forEach(el => {
+                    let random = Math.floor(Math.random() * 2) + 1;
+                    el.svgSrc = random == 1 ? cat1 : cat2
+                })
+            }
+            dispatch({type: "ADD", payload: data})
         }
-        dispatch({type: "ADD", payload: data})
-
     }
 
     function sortItems(val){

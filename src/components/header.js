@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import arrow from "../svg/arrow.svg"
 import refresh from "../svg/refresh.svg"
 
 
-export default function header(props){
+export default function Header(props){
+
+    const [currValue, setCurrValue] = useState(null);
 
     function handleInput(value){
+        setCurrValue(value);
         let elInput = document.querySelector(".form-group1:focus-within");
         let valid1 = document.getElementById("valid1")
        if(value > 0 && value <= 30) {
@@ -21,6 +24,12 @@ export default function header(props){
        }
     }
 
+    function check(){
+        if(currValue >0 && currValue <=30){
+            props.fetchCats();
+        }
+    }
+
 
     return(
         <div className="header">
@@ -30,7 +39,7 @@ export default function header(props){
                 <input id="inputCats"type="text" required min="1" max="30" onInput={(e)=>handleInput(e.target.value)}/>
                 </div>
                 <label id="valid1">Wartość musi być z przedziału 1 do 30</label>
-                <button  className="searchButton" type="button" onClick={props.fetchCats}>SZUKAJ</button>
+                <button  className="searchButton" type="button" onClick={check}>SZUKAJ</button>
             </div>
             <div className="header-right">
             <div className="header-nav">
