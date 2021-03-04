@@ -63,11 +63,12 @@ function App() {
         const response = await fetch(url);
         const data = await response.json();
 
-        data.forEach(el=>{
-            let random = Math.floor(Math.random()*2)+1;
-            el.svgSrc = random ==1 ? cat1 : cat2
-        })
-
+        {
+            data.forEach(el => {
+                let random = Math.floor(Math.random() * 2) + 1;
+                el.svgSrc = random == 1 ? cat1 : cat2
+            })
+        }
         dispatch({type: "ADD", payload: data})
 
     }
@@ -79,6 +80,7 @@ function App() {
   return (
     <div className="App">
         <Header fetchCats={download} setThisState={setState} sortItems={sortItems}/>
+        <hr/>
         <CatList className="mainContent" catsToFetch={state} catsList={catsList}/>
     </div>
   );
