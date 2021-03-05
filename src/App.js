@@ -19,7 +19,7 @@ function App() {
                 return response.json();
             }
         }).then(data=>{
-            data.forEach(el=>{
+            data.map(el=>{
                 let random = Math.floor(Math.random()*2)+1;
                 el.svgSrc = random ==1 ? cat1 : cat2
             })
@@ -64,13 +64,19 @@ function App() {
             const response = await fetch(url);
             const data = await response.json();
 
-            {
-                data.forEach(el => {
+            if(Array.isArray(data)) {
+                data.map(el => {
                     let random = Math.floor(Math.random() * 2) + 1;
                     el.svgSrc = random == 1 ? cat1 : cat2
                 })
+                dispatch({type: "ADD", payload: data})
+            }else{
+                let random = Math.floor(Math.random() * 2) + 1;
+                data.svgSrc = random == 1 ? cat1 : cat2
+                let newData = [];
+                newData.push(data)
+                dispatch({type: "ADD", payload: newData})
             }
-            dispatch({type: "ADD", payload: data})
         }
     }
 
