@@ -22,6 +22,7 @@ function App() {
             data.map(el=>{
                 let random = Math.floor(Math.random()*2)+1;
                 el.svgSrc = random ==1 ? cat1 : cat2
+                el.toggle = false;
             })
             dispatch({type: "ADD", payload: data})
         }).finally(()=>{})
@@ -68,11 +69,13 @@ function App() {
                 data.map(el => {
                     let random = Math.floor(Math.random() * 2) + 1;
                     el.svgSrc = random == 1 ? cat1 : cat2
+                    el.toggle = false;
                 })
                 dispatch({type: "ADD", payload: data})
             }else{
                 let random = Math.floor(Math.random() * 2) + 1;
                 data.svgSrc = random == 1 ? cat1 : cat2
+                data.toggle =false;
                 let newData = [];
                 newData.push(data)
                 dispatch({type: "ADD", payload: newData})

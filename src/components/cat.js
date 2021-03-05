@@ -7,14 +7,22 @@ export default function CatItem(props){
     const [modalState, setModalState] =useState(false);
     const [state, setState] =useState("");
 
-    function toggleModal(e, currentItem){
+    function toggleModal(currentItem){
+        console.log(currentItem)
         setState(currentItem);
-        setModalState(modalState ? false : true)
+        setModalState(p => !p)
     }
 
 
+    function hide(){
+        setModalState(false)
+    }
+
     return(
-        <div className="card" onClick={(e)=>toggleModal(e,props.item)}>
+        <div className="card" onClick={(e)=>{
+            e.preventDefault()
+            toggleModal(props.item)
+        }}>
             <div className="picture">
                 <img src={props.item.svgSrc}/>
             </div>
@@ -23,7 +31,7 @@ export default function CatItem(props){
             <div className="date">{date}</div>
             <div className="text">{props.item.text}</div>
             </div>
-            <Modal show={modalState} onClose={toggleModal} item={state}></Modal>
+            <Modal show={modalState} item={state} ></Modal>
         </div>
     )
 }
