@@ -8,7 +8,6 @@ export default function CatItem(props){
     const [state, setState] =useState("");
 
     function toggleModal(currentItem){
-        console.log(currentItem)
         setState(currentItem);
         setModalState(p => !p)
     }
