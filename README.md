@@ -1,9 +1,18 @@
 # Simply React app, for cats-facts API
 
- [API Documentation](https://alexwohlbruck.github.io/cat-facts/docs/)
+### project assumptions, do not use any libraries
 
 
- [Endpoints](https://alexwohlbruck.github.io/cat-facts/docs/endpoints/facts.html)
+## Project task
+
+[Figma-project-view](https://www.figma.com/file/4ypkpVvc2U8Diu84wsuSb2/Zadanie-rekturacyjne-2.0-(Copy)?node-id=5%3A3)
+
+## Documentation
+
+[API Documentation](https://alexwohlbruck.github.io/cat-facts/docs/)
+
+
+[Endpoints](https://alexwohlbruck.github.io/cat-facts/docs/endpoints/facts.html)
 
 
 ## Usage
