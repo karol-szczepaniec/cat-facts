@@ -8,7 +8,7 @@ function App() {
 
     const baseUrl = "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount="
 
-    const [state,setState] = useState(4);
+    const [state,setState] = useState(30);
 
     const [catsList, dispatch] = useReducer(catsReducer,[])
 
@@ -28,7 +28,7 @@ function App() {
         }).finally(()=>{})
 
 
-    },[0])
+    },[])
 
     function catsReducer(state, action){
         switch (action.type){
